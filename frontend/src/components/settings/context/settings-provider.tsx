@@ -1,70 +1,20 @@
 import type { SettingsState, SettingsProviderProps } from '../types';
 
-import { isEqual } from 'es-toolkit';
-import { useLocalStorage } from 'minimal-shared/hooks';
-import { getStorage as getStorageValue } from 'minimal-shared/utils';
-import { useMemo, useState, useEffect, useCallback, useEffectEvent } from 'react';
+import { useMemo, useState, useCallback } from 'react';
 
 import { SettingsContext } from './settings-context';
-import { SETTINGS_STORAGE_KEY } from '../settings-config';
 
-export function SettingsProvider({
-  children,
-  defaultSettings,
-  storageKey = SETTINGS_STORAGE_KEY,
-}: SettingsProviderProps) {
-  const { state, setState, resetState, setField } = useLocalStorage<SettingsState>(
-    storageKey,
-    defaultSettings
+export function SettingsProvider({ children, defaultSettings }: SettingsProviderProps) {
+  const [state, setState] = useState<SettingsState>(defaultSettings);
+
+  const setField = useCallback(
+    (name: keyof SettingsState, updateValue: SettingsState[keyof SettingsState]) => {
+      setState((prev) => ({ ...prev, [name]: updateValue }));
+    },
+    []
   );
 
-  const [openDrawer, setOpenDrawer] = useState(false);
-
-  const onToggleDrawer = useCallback(() => {
-    setOpenDrawer((prev) => !prev);
-  }, []);
-
-  const onCloseDrawer = useCallback(() => {
-    setOpenDrawer(false);
-  }, []);
-
-  const canReset = !isEqual(state, defaultSettings);
-
-  const onReset = useCallback(() => {
-    resetState(defaultSettings);
-  }, [defaultSettings, resetState]);
-
-  const resetOutdatedSettings = useEffectEvent(() => {
-    const storedValue = getStorageValue<SettingsState>(storageKey);
-
-    if (storedValue) {
-      try {
-        if (!storedValue.version || storedValue.version !== defaultSettings.version) {
-          onReset();
-        }
-      } catch {
-        onReset();
-      }
-    }
-  });
-
-  useEffect(() => {
-    resetOutdatedSettings();
-  }, []);
-
-  const memoizedValue = useMemo(
-    () => ({
-      canReset,
-      onReset,
-      openDrawer,
-      onCloseDrawer,
-      onToggleDrawer,
-      state,
-      setState,
-      setField,
-    }),
-    [canReset, onReset, openDrawer, onCloseDrawer, onToggleDrawer, state, setField, setState]
-  );
+  const memoizedValue = useMemo(() => ({ state, setField }), [state, setField]);
 
   return <SettingsContext value={memoizedValue}>{children}</SettingsContext>;
 }

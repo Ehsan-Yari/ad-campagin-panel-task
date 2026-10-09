@@ -9,14 +9,14 @@ export const navData: NavSectionProps['data'] = [
     subheader: 'کمپین‌ها',
     items: [
       {
-        title: 'فهرست کمپین‌ها',
-        path: paths.campaign.list,
-        icon: <Iconify icon="solar:list-bold" />,
-      },
-      {
         title: 'ساخت کمپین',
         path: paths.campaign.create,
         icon: <Iconify icon="mingcute:add-line" />,
+      },
+      {
+        title: 'فهرست کمپین‌ها',
+        path: paths.campaign.list,
+        icon: <Iconify icon="solar:list-bold" />,
       },
     ],
   },

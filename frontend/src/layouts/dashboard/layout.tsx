@@ -5,7 +5,6 @@ import type { MainSectionProps, HeaderSectionProps, LayoutSectionProps } from '.
 import { merge } from 'es-toolkit';
 import { useBoolean } from 'minimal-shared/hooks';
 
-import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 import { iconButtonClasses } from '@mui/material/IconButton';
 
@@ -17,7 +16,6 @@ import { VerticalDivider } from './content';
 import { NavVertical } from './nav-vertical';
 import { NavHorizontal } from './nav-horizontal';
 import { MenuButton } from '../components/menu-button';
-import { SettingsButton } from '../components/settings-button';
 import { navData as dashboardNavData } from '../nav-config-dashboard';
 import { dashboardLayoutVars, dashboardNavColorVars } from './css-vars';
 import { MainSection, layoutClasses, HeaderSection, LayoutSection } from '../core';
@@ -96,11 +94,6 @@ export function DashboardLayout({
             <VerticalDivider sx={{ [theme.breakpoints.up(layoutQuery)]: { display: 'flex' } }} />
           )}
         </>
-      ),
-      rightArea: (
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0, sm: 0.75 } }}>
-          <SettingsButton />
-        </Box>
       ),
     };
 
