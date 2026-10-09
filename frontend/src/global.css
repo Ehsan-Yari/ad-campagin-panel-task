@@ -1,0 +1,55 @@
+@import './components/scrollbar/styles.css';
+
+@font-face {
+  font-family: 'IRANSansXVFaNum';
+  src:
+    url('/fonts/IRANSansXVFaNum.woff2') format('woff2-variations'),
+    url('/fonts/IRANSansXVFaNum.woff2') format('woff2');
+  font-weight: 100 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IRANSansXV';
+  src:
+    url('/fonts/IRANSansXVF.woff2') format('woff2-variations'),
+    url('/fonts/IRANSansXVF.woff2') format('woff2');
+  font-weight: 100 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+body,
+#root,
+#root__layout {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 100%;
+  flex-direction: column;
+}
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: none;
+}
+input[type='number']::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+input[type='number']::-webkit-inner-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
