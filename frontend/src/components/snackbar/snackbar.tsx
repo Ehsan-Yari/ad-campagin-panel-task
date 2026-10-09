@@ -11,8 +11,10 @@ export function Snackbar() {
         expand
         closeButton
         gap={12}
-        offset={16}
+        offset={{ top: 'calc(16px + env(safe-area-inset-top))', right: 16, bottom: 16, left: 16 }}
+        mobileOffset={{ top: 'calc(16px + env(safe-area-inset-top))' }}
         visibleToasts={4}
+        style={{ '--width': 'min(440px, calc(100vw - 32px))' } as React.CSSProperties}
         position="top-right"
         className={snackbarClasses.root}
         toastOptions={{
