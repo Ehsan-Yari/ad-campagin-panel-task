@@ -33,12 +33,31 @@ export function getDescendantIds(node: CategoryNode): string[] {
   return node.children.flatMap((child) => [child.id, ...getDescendantIds(child)]);
 }
 
-export function toggleCategory(node: CategoryNode, selectedIds: string[]): string[] {
+export function toggleCategory(
+  tree: CategoryNode[],
+  node: CategoryNode,
+  selectedIds: string[]
+): string[] {
   const affected = [node.id, ...getDescendantIds(node)];
 
   if (selectedIds.includes(node.id)) {
     return selectedIds.filter((id) => !affected.includes(id));
   }
 
-  return [...new Set([...selectedIds, ...affected])];
+  return selectCompleteParents(tree, [...new Set([...selectedIds, ...affected])]);
+}
+
+function selectCompleteParents(tree: CategoryNode[], selectedIds: string[]): string[] {
+  const selected = new Set(selectedIds);
+
+  const visit = (node: CategoryNode) => {
+    node.children.forEach(visit);
+
+    if (node.children.length && node.children.every((child) => selected.has(child.id))) {
+      selected.add(node.id);
+    }
+  };
+  tree.forEach(visit);
+
+  return [...selected];
 }

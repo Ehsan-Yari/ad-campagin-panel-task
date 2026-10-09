@@ -37,7 +37,7 @@ export function CategoryTree({ tree, value, disabled, onChange }: CategoryTreePr
           value={value}
           disabled={disabled}
           ancestorChecked={false}
-          onToggle={(target) => onChange(toggleCategory(target, value))}
+          onToggle={(target) => onChange(toggleCategory(tree, target, value))}
         />
       ))}
     </Box>
