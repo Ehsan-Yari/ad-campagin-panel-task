@@ -17,6 +17,7 @@ A small full-stack panel for creating and managing advertising campaigns. The UI
 
 **Campaign list:** a table of campaigns with title, cost per click, daily budget and total budget.
 
+- A button next to the title opens the campaign's categories in a read-only tree, with excluded children marked. Campaigns that target all categories show a label instead.
 - A pencil button next to each budget value opens a popup to edit it.
 - An eye button opens a modal with every click of the campaign. A campaign can have more than 10,000 clicks, so the list is virtualized.
 - Dates are stored in the Gregorian calendar on the backend and shown in the Jalali (Shamsi) calendar on the frontend.
@@ -83,6 +84,7 @@ Open http://localhost:8081. The dev server forwards `/api` requests to the backe
 | POST   | `/api/campaigns`            | Create a campaign             |
 | PATCH  | `/api/campaigns/:id`        | Update one or more budgets    |
 | GET    | `/api/campaigns/:id/clicks` | All clicks of a campaign      |
+| GET    | `/api/campaigns/:id/categories` | Selected category ids of a campaign |
 
 ## Project structure
 

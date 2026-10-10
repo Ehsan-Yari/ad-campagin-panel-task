@@ -19,13 +19,23 @@ type Props = {
   campaign: Campaign;
   onEdit: (field: BudgetField, anchorEl: HTMLElement) => void;
   onShowClicks: () => void;
+  onShowCategories: () => void;
 };
 
-export function CampaignTableRow({ campaign, onEdit, onShowClicks }: Props) {
+export function CampaignTableRow({ campaign, onEdit, onShowClicks, onShowCategories }: Props) {
   return (
     <TableRow hover>
       <TableCell>
-        <Typography variant="subtitle2">{campaign.title}</Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+          <Typography variant="subtitle2">{campaign.title}</Typography>
+          {!campaign.allCategories && (
+            <Tooltip title="دسته‌بندی‌ها">
+              <IconButton size="small" onClick={onShowCategories}>
+                <Iconify width={18} icon="solar:list-bold" />
+              </IconButton>
+            </Tooltip>
+          )}
+        </Box>
         {campaign.allCategories && (
           <Label color="info" sx={{ mt: 0.5 }}>
             همه دسته‌بندی‌ها

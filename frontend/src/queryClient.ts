@@ -23,5 +23,6 @@ export const queryKeys = {
   campaigns: {
     all: ['campaigns'],
     clicks: (id: number) => ['campaigns', id, 'clicks'],
+    categories: (id: number) => ['campaigns', id, 'categories'],
   },
 };

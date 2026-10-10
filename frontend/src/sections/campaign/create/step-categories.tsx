@@ -13,7 +13,7 @@ import { useCategories } from 'src/modules/categories/queries';
 
 import { Field } from 'src/components/hook-form';
 
-import { CategoryTree } from './category-tree';
+import { CategoryTree } from '../components/category-tree';
 
 export function StepCategories() {
   const { control } = useFormContext();

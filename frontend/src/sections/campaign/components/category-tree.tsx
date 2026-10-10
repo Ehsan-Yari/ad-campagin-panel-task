@@ -17,7 +17,7 @@ type CategoryTreeProps = {
   tree: CategoryNode[];
   value: string[];
   disabled?: boolean;
-  onChange: (value: string[]) => void;
+  onChange?: (value: string[]) => void;
 };
 
 export function CategoryTree({ tree, value, disabled, onChange }: CategoryTreeProps) {
@@ -37,7 +37,7 @@ export function CategoryTree({ tree, value, disabled, onChange }: CategoryTreePr
           value={value}
           disabled={disabled}
           ancestorChecked={false}
-          onToggle={(target) => onChange(toggleCategory(tree, target, value))}
+          onToggle={onChange && ((target) => onChange(toggleCategory(tree, target, value)))}
         />
       ))}
     </Box>
@@ -49,7 +49,7 @@ type CategoryTreeItemProps = {
   value: string[];
   disabled?: boolean;
   ancestorChecked: boolean;
-  onToggle: (node: CategoryNode) => void;
+  onToggle?: (node: CategoryNode) => void;
 };
 
 function CategoryTreeItem({
@@ -89,7 +89,9 @@ function CategoryTreeItem({
           checked={checked}
           disabled={disabled}
           indeterminate={indeterminate}
-          onChange={() => onToggle(node)}
+          onChange={() => onToggle?.(node)}
+          disableRipple={!onToggle}
+          sx={{ ...(!onToggle && { cursor: 'default' }) }}
         />
 
         <Typography

@@ -21,3 +21,13 @@ export const useCampaignClicks = (id?: number) => {
 
   return { clicks: data?.clicks ?? [], count: data?.count ?? 0, loading: isPending, error };
 };
+
+export const useCampaignCategories = (id?: number) => {
+  const { data, isPending, error } = useQuery({
+    queryKey: queryKeys.campaigns.categories(id ?? 0),
+    queryFn: () => campaignsService.getCategories(id ?? 0),
+    enabled: !!id,
+  });
+
+  return { categoryIds: data?.categoryIds ?? [], loading: isPending, error };
+};

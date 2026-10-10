@@ -4,6 +4,7 @@ import type {
   CampaignsResponse,
   CreateCampaignPayload,
   UpdateCampaignPayload,
+  CampaignCategoriesResponse,
 } from 'src/modules/campaigns/interface/campaigns';
 
 import axiosClient from 'src/api/axios';
@@ -24,6 +25,12 @@ export default {
   },
   getClicks: async (id: number) => {
     const res = await axiosClient.get<ClicksResponse>(endpoints.campaigns.clicks(id));
+    return res.data;
+  },
+  getCategories: async (id: number) => {
+    const res = await axiosClient.get<CampaignCategoriesResponse>(
+      endpoints.campaigns.categories(id)
+    );
     return res.data;
   },
 };

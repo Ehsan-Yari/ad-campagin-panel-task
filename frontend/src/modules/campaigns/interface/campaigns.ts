@@ -34,3 +34,7 @@ export type ClicksResponse = {
   clicks: Click[];
   count: number;
 };
+
+export type CampaignCategoriesResponse = {
+  categoryIds: string[];
+};

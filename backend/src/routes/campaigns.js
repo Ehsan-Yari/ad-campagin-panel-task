@@ -117,3 +117,12 @@ campaignsRouter.get('/:id/clicks', async (req, res) => {
 
   res.json({ clicks: rows, count: rows.length });
 });
+
+campaignsRouter.get('/:id/categories', async (req, res) => {
+  const { rows } = await pool.query(
+    'SELECT category_id AS "categoryId" FROM campaign_categories WHERE campaign_id = $1',
+    [req.params.id]
+  );
+
+  res.json({ categoryIds: rows.map((row) => row.categoryId) });
+});

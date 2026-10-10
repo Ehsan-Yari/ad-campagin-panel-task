@@ -24,6 +24,7 @@ import { TableNoData, TableSkeleton } from 'src/components/table';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
 
 import { ClicksDialog } from './clicks-dialog';
+import { CategoriesDialog } from './categories-dialog';
 import { CampaignTableRow } from './campaign-table-row';
 import { EditBudgetPopover } from './edit-budget-popover';
 
@@ -38,6 +39,7 @@ export function CampaignListView() {
 
   const [editing, setEditing] = useState<EditingState | null>(null);
   const [clicksCampaign, setClicksCampaign] = useState<Campaign | null>(null);
+  const [categoriesCampaign, setCategoriesCampaign] = useState<Campaign | null>(null);
 
   return (
     <DashboardContent>
@@ -82,6 +84,7 @@ export function CampaignListView() {
                       campaign={campaign}
                       onEdit={(field, anchorEl) => setEditing({ campaign, field, anchorEl })}
                       onShowClicks={() => setClicksCampaign(campaign)}
+                      onShowCategories={() => setCategoriesCampaign(campaign)}
                     />
                   ))
                 )}
@@ -104,6 +107,8 @@ export function CampaignListView() {
       )}
 
       <ClicksDialog campaign={clicksCampaign} onClose={() => setClicksCampaign(null)} />
+
+      <CategoriesDialog campaign={categoriesCampaign} onClose={() => setCategoriesCampaign(null)} />
     </DashboardContent>
   );
 }
